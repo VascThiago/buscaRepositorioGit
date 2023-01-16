@@ -122,10 +122,22 @@ main {
 }
 
 /* REPOSITORIES */
-
 .container .profile-data .repositories h2{
-  margin-bottom: 30px;
+  margin-bottom: 10px;
   text-align: center;
+}
+
+.container .profile-data .repositories a p {
+  margin-bottom: 10px;
+}
+
+.container .profile-data .repositories a span{
+  font-weight: 500;
+  color: #fff;
+  border:1px solid #000;
+  border-radius: 5px;
+  background-color: #24292e;
+  padding: 3px;
 }
 
 .container .profile-data .repositories ul{
@@ -135,9 +147,9 @@ main {
 }
 
 .container .profile-data .repositories ul li a{
-  padding: 20px;
+  padding: 10px;
   border: 1px solid grey;  
-  margin: 20px;
+  margin: 10px;
   display: block;
   border-radius: 7px;
   transition: 0.3s ease-in-out;
@@ -152,6 +164,17 @@ main {
   display: none;
 }
 
+/* EVENTS */
+.container .profile-data .repositories .events{
+  display: flex;
+  flex-direction: column;
+}
+
+.container .profile-data .repositories span{
+  font-weight: bold;
+}
+
+/* MEDIAS */
 @media (max-width: 1280px) {
   .container {
     flex-direction: column;
