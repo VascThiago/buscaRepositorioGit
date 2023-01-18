@@ -1,7 +1,6 @@
 const screen = {
     userProfile: document.querySelector('.profile-data'),
     renderUser(user) {
-        //USUARIO
         this.userProfile.innerHTML = `  <div class="info">
                                             <img src="${user.avatarUrl}" alt="Foto de perfil" />
                                             <div class="data">
@@ -11,16 +10,17 @@ const screen = {
                                             </div>
                                         </div>`;
 
-        //REPOSITÓRIOS
         let reposItens = '';
         user.repositories.forEach(repo => reposItens += 
             `<li>
                 <a href="${repo.html_url}" target="_blank">
                     <p>${repo.name}</p>
-                    <span>🍴 ${repo.forks}</span> 
-                    <span>⭐ ${repo.stargazers_count}</span>
-                    <span>👀 ${repo.watchers_count}</span>
-                    <span>👨‍💻 ${repo.language ?? 'linguagem não definida'}</span>
+                    <div class="infos-repo">
+                        <div class="item">🍴 ${repo.forks}</div> 
+                        <div class="item">⭐ ${repo.stargazers_count}</div>
+                        <div class="item">👀 ${repo.watchers_count}</div>
+                        <div class="item">👨‍💻 ${repo.language ?? 'linguagem não definida'}</div>
+                    </div>
                 </a>
              </li>`);
 
@@ -31,7 +31,6 @@ const screen = {
                                             </div>`
         }
 
-        //EVENTOS
         let validTypesEvents = user.events.filter((item) => {
             return item.type === 'PushEvent' || item.type === 'CreateEvent'
         });
@@ -52,10 +51,15 @@ const screen = {
                                                 <h2>Eventos</h2>
                                                 <ul class="events"> ${eventItens} </ul>
                                             </div>`
+        } else {
+            this.userProfile.innerHTML += ` <div class="repositories">
+                                                <h2>Eventos</h2>
+                                                <ul class="events"> Este usuário não possui eventos </ul>
+                                            </div>`
         }
         
     },
-    //NOT FOUND
+ 
     renderNotFound() {
         this.userProfile.innerHTML = "<h2>Usuário não encontrado!</h2>";
     }

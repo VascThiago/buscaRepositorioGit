@@ -131,13 +131,12 @@ main {
   margin-bottom: 10px;
 }
 
-.container .profile-data .repositories a span{
+.container .profile-data .repositories .item{
   font-weight: 500;
   color: #fff;
-  border:1px solid #000;
   border-radius: 5px;
   background-color: #24292e;
-  padding: 3px;
+  padding: 5px;
 }
 
 .container .profile-data .repositories ul{
@@ -153,6 +152,11 @@ main {
   display: block;
   border-radius: 7px;
   transition: 0.3s ease-in-out;
+}
+
+.container .profile-data .repositories ul li a .infos-repo {
+  display: flex;
+  gap: 5px;
 }
 
 .container .profile-data .repositories ul li a:hover{
