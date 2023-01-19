@@ -10,8 +10,13 @@ const screen = {
                                             </div>
                                         </div>`;
 
+        this.renderRepositories(user.repositories);
+        this.renderEvents(user.events);
+    },
+
+    renderRepositories(repositories) {
         let reposItens = '';
-        user.repositories.forEach(repo => reposItens += 
+        repositories.forEach(repo => reposItens += 
             `<li>
                 <a href="${repo.html_url}" target="_blank">
                     <p>${repo.name}</p>
@@ -24,29 +29,29 @@ const screen = {
                 </a>
              </li>`);
 
-        if (user.repositories.length > 0) {
+        if (repositories.length > 0) {
             this.userProfile.innerHTML += ` <div class="repositories section">
                                                 <h2>Repositórios</h2>
                                                 <ul>${reposItens}</ul>
                                             </div>`
         }
+    },
 
-        let validTypesEvents = user.events.filter((item) => {
-            return item.type === 'PushEvent' || item.type === 'CreateEvent'
-        });
+    renderEvents(events) {
+        let validTypesEvents = events.filter(event => event.type === "CreateEvent" || event.type === "PushEvent");
         let eventItens = '';
 
         validTypesEvents.forEach(e => {
-            if(e.payload.commits) {
-                let commits = e.payload.commits[0].message;
-
-                eventItens += `<li><p><span>${e.repo.name}</span> -${commits}</p></li>`
-            } else {
-                eventItens += `<li><p><span>${e.repo.name}</span></p></li>`
-            }
+            eventItens += 
+            `<li>
+                <p>
+                    <span>${e.repo.name}</span> 
+                    - ${e.payload.commits?.[0].message ?? `Create ${e.payload.ref_type}`}
+                </p>
+            </li>`
         });
 
-        if(user.events.length > 0) {
+        if(events.length > 0) {
             this.userProfile.innerHTML += ` <div class="repositories">
                                                 <h2>Eventos</h2>
                                                 <ul class="events"> ${eventItens} </ul>
@@ -57,7 +62,6 @@ const screen = {
                                                 <ul class="events"> Este usuário não possui eventos </ul>
                                             </div>`
         }
-        
     },
  
     renderNotFound() {
